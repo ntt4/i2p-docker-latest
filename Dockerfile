@@ -1,14 +1,18 @@
 FROM ubuntu:latest
 MAINTAINER ntt4
 
+
 ENV I2P_DIR /var/lib/i2p
 ENV DEBIAN_FRONTEND noninteractive
 ENV USER i2prouter
 ENV GROUP i2prouter
 
+
 RUN sed -i 's/.*\(en_US\.UTF-8\)/\1/' /etc/locale.gen && \
     /usr/sbin/locale-gen && \
     /usr/sbin/update-locale LANG=en_US.UTF-8 LANGUAGE="en_US:en"
+
+RUN apt-get update && apt-get -y install software-properties-common
 
 RUN apt-add-repository ppa:i2p-maintainers/i2p && apt-get update
 
@@ -33,17 +37,23 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 EXPOSE 4444 7657 6668 7658 7659 7660
 
+
 VOLUME /var/lib/i2p
+
 
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 
+
 RUN sed -i 's/false/true/' /etc/default/i2p
+
 RUN service i2p start
 
 
 RUN sed -i 's/127.0.0.1/0.0.0.0/g' ${I2P_DIR}/i2p-config/i2ptunnel.config
+
 RUN sed -i 's/::1,127.0.0.1/0.0.0.0/g' ${I2P_DIR}/i2p-config/clients.config
+
 RUN echo "i2cp.tcp.bindAllInterfaces=true" >> ${I2P_DIR}/i2p-config/router.config
 
 
