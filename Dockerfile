@@ -50,11 +50,11 @@ RUN sed -i 's/false/true/' /etc/default/i2p
 RUN service i2p start
 
 
-RUN sed -i 's/127.0.0.1/0.0.0.0/g' ${I2P_DIR}/i2p-config/i2ptunnel.config
+RUN sed -i 's/127.0.0.1/0.0.0.0/g' /var/lib/i2p/i2p-config/i2ptunnel.config
 
-RUN sed -i 's/::1,127.0.0.1/0.0.0.0/g' ${I2P_DIR}/i2p-config/clients.config
+RUN sed -i 's/::1,127.0.0.1/0.0.0.0/g' /var/lib/i2p/i2p-config/clients.config
 
-RUN echo "i2cp.tcp.bindAllInterfaces=true" >> ${I2P_DIR}/i2p-config/router.config
+RUN echo "i2cp.tcp.bindAllInterfaces=true" >> /var/lib/i2p/i2p-config/router.config
 
 
 CMD sudo /etc/init.d/i2p start && sudo tail -f /var/log/i2p/wrapper.log
