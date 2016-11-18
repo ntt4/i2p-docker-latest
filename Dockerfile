@@ -12,7 +12,7 @@ RUN sed -i 's/.*\(en_US\.UTF-8\)/\1/' /etc/locale.gen && \
     /usr/sbin/locale-gen && \
     /usr/sbin/update-locale LANG=en_US.UTF-8 LANGUAGE="en_US:en"
 
-RUN apt-get update && apt-get -y install software-properties-common /
+RUN apt-get update && apt-get -y install software-properties-common \
     sudo
 
 RUN apt-add-repository ppa:i2p-maintainers/i2p && apt-get update
