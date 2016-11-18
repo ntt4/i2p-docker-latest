@@ -38,7 +38,7 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 EXPOSE 4444 7657 6668 7658 7659 7660
 
 
-VOLUME /var/lib/i2p
+#VOLUME /var/lib/i2p
 
 
 ENV LANG en_US.UTF-8
